@@ -1,0 +1,64 @@
+.seat-selection {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+.screen {
+    background-color: #ccc;
+    padding: 10px;
+    margin: 20px auto;
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+}
+.seats {
+    display: inline-block;
+    margin: 0 auto;
+}
+.row {
+    margin: 10px 0;
+}
+/* 좌석예매 완료 */
+.seat_comp{
+    background-color: #717070 !important;
+}
+.seat {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.seat:hover {
+    background-color: #45a049;
+}
+.seat.selected {
+    background-color: #FFD700;
+}
+.seat.unavailable {
+    background-color: #D3D3D3;
+    cursor: not-allowed;
+}
+.legend {
+    margin-top: 20px;
+}
+.legend span {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.legend .available {
+    background-color: #4CAF50;
+    color: white;
+}
+.legend .selected {
+    background-color: #FFD700;
+    color: black;
+}
+.legend .unavailable {
+    background-color: #D3D3D3;
+    color: black;
+}

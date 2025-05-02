@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APINK 영화예매 사이트</title>
+    <link rel="stylesheet" href="./movie_main.css">
+</head>
+<body>
+
+<div class="reservation-form">
+    <h2>영화 예매</h2>
+    <form id="frm" action="./movie_reservok.do" method="post" onsubmit="return reserve()">
+        <!-- 예매고객의 고유번호 코드 (js 난수로 자동생성) -->
+        <input type="hidden" name="usercode" value="">
+        <!-- 영화 고유번호 코드 -->
+        <input type="hidden" name="moviecode" value="402">
+        <label for="customer-name">고객명</label>
+        <input type="text" id="customer-name" name="mname" placeholder="고객명을 입력하세요" required>
+
+        <label for="movie-name">영화명</label>
+        <input type="text" id="movie-name" value="거룩한 밤:데몬 헌터스" name="movienm" placeholder="영화명을 입력하세요" readonly="readonly">
+
+        <label for="reservation-date">예매일자</label>
+        <input type="date" id="reservation-date" name="mdate" required>
+
+        <label for="reservation-time">예매시간</label>
+        <select id="reservation-time" name="mtime">
+        <option value="">예매시간을 선택하세요</option>
+        <option value="10:00">오전 10:00</option>
+        <option value="13:00">오후 13:00</option>
+        <option value="16:00">오후 16:00</option>
+        <option value="20:00">오후 20:00</option>
+        </select>
+
+        <label for="number-of-people">인원수</label>
+        <input type="text" id="number-of-people" name="mperson" min="1" placeholder="인원수를 입력하세요" required>
+
+        <button type="submit">예매하기</button>
+    </form>
+</div>
+<script src="./movie_main.js?v=1"></script>
+
+</body>
+</html>
