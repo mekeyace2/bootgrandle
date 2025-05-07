@@ -25,6 +25,7 @@ repositories {
 }
 
 dependencies {
+		
 	
 	//JSP-Server Core
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
@@ -37,6 +38,16 @@ dependencies {
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
     
+    //thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+                
+    //Database 
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+    //test : debug로 임시로 데이터 베이스를 연결
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'    
     
     
 	implementation 'org.springframework.boot:spring-boot-starter-mail'

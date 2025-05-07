@@ -1,18 +1,27 @@
 package kr.co.apink;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.List;
+import java.util.Properties;
+
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.annotation.Resource;
+import jakarta.servlet.ServletRequest;
 
 @Controller
 public class main_Controller {
@@ -24,7 +33,73 @@ public class main_Controller {
 	
 	@Resource(name="movie_DTO")
 	movie_DTO md;
+	
+	@Resource(name="store_DTO")
+	store_DTO sdto;
+	
+	@Autowired
+	movie_service msr;
 		
+	//Cloud Mysql 정보값 가져오는 페이지
+	@GetMapping("/data2.do")
+	public String data2() throws Exception{
+		try {
+			//@Bean으로 현재 Database를 연결하여 데이터를 가져오는 방식
+			List<store_DTO> all = this.msr.store_all();
+			for(store_DTO dto : all) {
+				this.log.info(dto.getScode());
+			}
+		}catch (Exception e) {
+			this.log.info(e.toString());
+		}
+						
+		return null;
+	}
+	
+	//본서버의 MariaDB 정보값 가져오는 페이지
+	@GetMapping("/data.do")
+	public String data() throws Exception {
+					
+		//실서버에 database연결 확인
+		List<movie_DTO> all = this.msr.movie_all();
+		for(movie_DTO dto : all) {
+			this.log.info(dto.getMname());
+		}
+		return null;
+	}
+	
+	
+	//thymeleaf sample
+	@GetMapping("/sample.do")
+	public String sample(Model m) {
+		String pdname = "LG 에어콘";
+		m.addAttribute("pdname",pdname);
+		return "/subpage.html";
+	}
+	
+
+	@PostMapping("/webfileok.do")
+	public String webfileok(@RequestParam("file1")MultipartFile file1,
+			ServletRequest req) throws Exception {
+		long filesize = file1.getSize();	//파일용량
+		//this.log.info(file1.getOriginalFilename());
+		String url = req.getServletContext().getRealPath("/upload/");
+		//File f = new File(url);
+		
+		//Spring-boot에서는 RealPath => src 디렉토리에 생성을 하여 경로를 설정하게 됨
+		//Spring에서는 RealPath => temp 디렉토리에 생성을 하게 됩니다.
+		this.log.info(url);
+		String copys = url + file1.getOriginalFilename();
+		try {
+			FileCopyUtils.copy(file1.getBytes(), new File(copys));
+		}catch (Exception e) {
+			this.log.info(e.toString());
+		}
+		return null;
+	}
+	
+	
+	
 	//예매정보 확인 및 좌석 배치도 페이지
 	@PostMapping("/movie_reservok.do")
 	public String movie_reservok(Model m,
