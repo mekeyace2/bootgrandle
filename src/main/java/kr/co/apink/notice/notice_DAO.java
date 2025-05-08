@@ -19,5 +19,10 @@ public class notice_DAO {
 		return all;
 	}
 	
+	public Integer notice_count() {
+		Integer result = this.sql1.selectOne("notice_count");
+		return result;
+	}
+	
 	
 }

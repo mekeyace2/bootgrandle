@@ -4,4 +4,9 @@
 <select id="notice_list" resultType="kr.co.apink.notice.notice_DTO">
 select nidx,subject,writer,nview,ndate from notice order by nidx desc
 </select>
+
+<select id="notice_count" resultType="Integer">
+select count(*) as ctn from notice
+</select>
+
 </mapper>

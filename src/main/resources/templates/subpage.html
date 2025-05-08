@@ -10,5 +10,41 @@
 <div th:insert="~{/notice_list.html :: tables}"></div>
 <div th:insert="~{/notice_list.html :: pageing}"></div>
 
+<!-- 
+<input type="button" value="시작" onclick="aaa()"><br>
+<input type="button" value="종료" onclick="stop()">
+ -->
 </body>
+<script>
+//setInterval : 한번 적용시 지속적으로 반복실행 하는 형태의 타임 함수 입니다.
+//setTimeout : 한번 적용 후 정지하는 타임함수 입니다. 단, 재귀함수 형태로 사용시 반복하게 됨
+var ea = "[[${ea}]]";
+var timer;
+function aaa(){
+	//timer = setInterval(start,1000);
+}
+function start(){	
+	//ajax => fetch
+	fetch("./eacheck.do?ea="+ea)
+	.then((aa)=>{
+		return aa.text();
+	}).then((bb)=>{
+		if(bb=="ok"){
+			location.reload();
+		}
+	}).catch((error)=>{
+		alert("현재 서비스 장애로 인하여 페이지 오류가 발생하였습니다.");
+	});	
+	timer = setTimeout(start,5000);
+}
+setTimeout(start,1000);
+
+function stop(){
+	clearTimeout(timer);
+}
+
+
+
+
+</script>
 </html>

@@ -58,12 +58,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>게시판 제목 예시</td>
-                <td>홍길동</td>
-                <td>2023-10-01</td>
+        
+            <tr th:each="n,a : ${all}">
+                <td>[[${all.size - a.index}]]</td>
+                <td align="left">[[${n.subject}]]</td>
+                <td>[[${n.writer}]]</td>
+                <td>[[${#strings.substring(n.ndate,0,10)}]]</td>
             </tr>
+            
         </tbody>
     </table>
 
