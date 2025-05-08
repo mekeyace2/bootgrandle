@@ -4,9 +4,6 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
-import java.util.Properties;
-
-import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +37,23 @@ public class main_Controller {
 	@Autowired
 	movie_service msr;
 		
+	//Cloud Oracle 정보값 가져오는 페이지
+	@GetMapping("/data3.do")
+	public String data3() throws Exception{
+		try {		
+			List<member_DTO> all = this.msr.member_all();
+			for(member_DTO dto : all) {
+				this.log.info(dto.getMNAME());
+			}
+		}catch (Exception e) {
+			this.log.info(e.toString());
+		}
+		
+		return null;
+	}
+	
+	
+	
 	//Cloud Mysql 정보값 가져오는 페이지
 	@GetMapping("/data2.do")
 	public String data2() throws Exception{

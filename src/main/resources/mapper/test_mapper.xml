@@ -10,4 +10,10 @@ select * from movie_res order by midx desc
 <select id="store_all" resultType="kr.co.apink.store_DTO">
 select * from store order by sidx desc
 </select>
+
+<!-- APINK : 1521 -->
+<select id="member_all" resultType="kr.co.apink.member_DTO">
+select * from MEMBERSHIP order by MIDX desc
+</select>
+
 </mapper>

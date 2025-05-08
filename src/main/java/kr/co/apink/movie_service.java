@@ -22,7 +22,15 @@ public class movie_service {
 	@Qualifier(value = "sqltemplate2")
 	private SqlSession sql2;
 	
+	@Autowired	//Oracle
+	@Qualifier(value = "sqltemplate3")
+	private SqlSession sql3;
 	
+	public List<member_DTO> member_all(){
+		List<member_DTO> all = this.sql3.selectList("member_all");
+		return all;
+	}
+		
 	public List<store_DTO> store_all(){
 		//List<store_DTO> all = this.mapper.store_all();
 		List<store_DTO> all = this.sql2.selectList("store_all");
