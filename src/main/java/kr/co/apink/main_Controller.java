@@ -45,12 +45,12 @@ public class main_Controller {
 	public String data2() throws Exception{
 		try {
 			//@Bean으로 현재 Database를 연결하여 데이터를 가져오는 방식
-			/*
+			
 			List<store_DTO> all = this.msr.store_all();
 			for(store_DTO dto : all) {
 				this.log.info(dto.getScode());
 			}
-			*/
+			
 		}catch (Exception e) {
 			this.log.info(e.toString());
 		}

@@ -18,10 +18,15 @@ public class movie_service {
 	@Qualifier(value = "sqltemplate")
 	private SqlSession sql1;
 	
+	@Autowired
+	@Qualifier(value = "sqltemplate2")
+	private SqlSession sql2;
+	
 	
 	public List<store_DTO> store_all(){
 		//List<store_DTO> all = this.mapper.store_all();
-		return null;
+		List<store_DTO> all = this.sql2.selectList("store_all");
+		return all;
 	}
 	public List<movie_DTO> movie_all(){
 		//List<movie_DTO> all = this.mapper.movie_all();
