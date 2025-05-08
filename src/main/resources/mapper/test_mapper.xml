@@ -5,6 +5,7 @@
 <select id="movie_all" resultType="kr.co.apink.movie_DTO">
 select * from movie_res order by midx desc
 </select>
+
 <!-- webapi : 13306  -->
 <select id="store_all" resultType="kr.co.apink.store_DTO">
 select * from store order by sidx desc

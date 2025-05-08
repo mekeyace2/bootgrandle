@@ -45,10 +45,12 @@ public class main_Controller {
 	public String data2() throws Exception{
 		try {
 			//@Bean으로 현재 Database를 연결하여 데이터를 가져오는 방식
+			/*
 			List<store_DTO> all = this.msr.store_all();
 			for(store_DTO dto : all) {
 				this.log.info(dto.getScode());
 			}
+			*/
 		}catch (Exception e) {
 			this.log.info(e.toString());
 		}
@@ -59,7 +61,6 @@ public class main_Controller {
 	//본서버의 MariaDB 정보값 가져오는 페이지
 	@GetMapping("/data.do")
 	public String data() throws Exception {
-					
 		//실서버에 database연결 확인
 		List<movie_DTO> all = this.msr.movie_all();
 		for(movie_DTO dto : all) {
