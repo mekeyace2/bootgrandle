@@ -24,5 +24,11 @@ public class notice_DAO {
 		return result;
 	}
 	
+	//실시간 id 체크
+	public Integer test_member(String mid) {
+		Integer result = this.sql1.selectOne("test_member",mid);
+		return result;
+	}
+	
 	
 }

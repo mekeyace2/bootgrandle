@@ -4,14 +4,41 @@
 <meta charset="UTF-8">
 <title>게시판 리스트 출력</title>
 <style th:replace="~{/notice_list.html :: styles}"></style>
+<style>
+/* 새로운 공지글이 등록 되었을 경우 메세지를 출력하는 역활 */
+.popmsg{
+  position:absolute;
+  right:5%;
+  bottom:5%;
+  width:250px;
+  height:50px;
+  background-color:hotpink;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  animation : fade 2s;
+  display: none;
+}
+@keyframes fade{
+	from {
+		opacity : 1;
+	}
+	to{
+		opacity : 0;
+	}
+} 
+
+
+</style>
 </head>
 <body>
+<div class="popmsg" id="popmsg">새로운 공지글이 등록 되었습니다.</div>
 <div th:insert="~{/top.html :: menu}"></div>
 <div th:insert="~{/notice_list.html :: tables}"></div>
 <div th:insert="~{/notice_list.html :: pageing}"></div>
-
 <!-- 
-<input type="button" value="시작" onclick="aaa()"><br>
+<input type="button" value="시작" onclick="start()"><br>
 <input type="button" value="종료" onclick="stop()">
  -->
 </body>
@@ -23,20 +50,51 @@ var timer;
 function aaa(){
 	//timer = setInterval(start,1000);
 }
+//javascript => ajax변수.open("","",false) => false 동기, true 비동기
+
+var popmsg = document.querySelector("#popmsg");
+var count = 0;
+//async + await 동기통신 (pending : 통신발생시 서버에 응답을 기다리는 상황)
+async function start(){
+	try{
+		popmsg.style.display = "none";
+		var res = await fetch("./eacheck.do?ea="+ea);
+		var data = await res.text();
+		if(data=="ok" && count==0){
+			popmsg.style.display = "block";
+			count++;
+			//location.reload();	//신규 등록을을 메세지로 출력
+		}
+		else if(data == "error"){
+			alert("현재 서비스 장애로 인하여 페이지 오류가 발생하였습니다.");
+		}
+		timer = await setTimeout(start,5000);
+	}catch(error){
+		if(error == "error"){
+			alert("현재 서비스 장애로 인하여 페이지 오류가 발생하였습니다.");
+		}
+	}
+}
+//비동기 통신
+/*
 function start(){	
-	//ajax => fetch
+	//ajax => fetch => 5초 한번씩 서버와 통신
 	fetch("./eacheck.do?ea="+ea)
 	.then((aa)=>{
 		return aa.text();
-	}).then((bb)=>{
+	})
+	.then((bb)=>{
+		//console.log(bb);
 		if(bb=="ok"){
 			location.reload();
 		}
-	}).catch((error)=>{
+	})
+	.catch((error)=>{
 		alert("현재 서비스 장애로 인하여 페이지 오류가 발생하였습니다.");
 	});	
-	timer = setTimeout(start,5000);
+	//timer = setTimeout(start,5000);  //1000 = 1초
 }
+*/
 setTimeout(start,1000);
 
 function stop(){

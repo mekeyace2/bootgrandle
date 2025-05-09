@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface notice_mapper {
 	List<notice_DTO> notice_list();	
 	Integer notice_count();
+	Integer test_member(String mid);
 }

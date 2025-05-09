@@ -58,14 +58,12 @@
             </tr>
         </thead>
         <tbody>
-        
             <tr th:each="n,a : ${all}">
                 <td>[[${all.size - a.index}]]</td>
                 <td align="left">[[${n.subject}]]</td>
                 <td>[[${n.writer}]]</td>
                 <td>[[${#strings.substring(n.ndate,0,10)}]]</td>
             </tr>
-            
         </tbody>
     </table>
 
